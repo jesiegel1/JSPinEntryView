@@ -245,13 +245,14 @@ public protocol CBPinEntryViewDelegate: class {
         }
     }
 
-    open func clearEntry() {
+    open func clearEntry(shouldResign: Bool) {
         setError(isError: false)
         textField.text = ""
         for button in entryButtons {
             button.setTitle("", for: .normal)
         }
 
+        guard !shouldResign else { return }
         if let firstButton = entryButtons.first {
             didPressCodeButton(firstButton)
         }
